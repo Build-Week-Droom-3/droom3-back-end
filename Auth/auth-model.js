@@ -1,0 +1,34 @@
+const jwt = require("jsonwebtoken");
+const secret = require("../Secrets/index");
+
+const verifyToken = () => {
+    return async(req, res, next) => {
+        try {
+            const token = req.headers.authorization;
+            const decoded = jwt.verify(token, secret.jwtSecret);
+
+            req.decoded = decoded.subject;
+            next();
+        } catch(err) {
+            next(err);
+        }
+    }
+}
+
+const generateToken = (user) => {
+    const payload = {
+        subject: user.id,
+        username: user.username
+    };
+
+    const options = {
+        expiresIn: '1d'
+    };
+
+    return jwt.sign(payload, secret.jwtSecret, options);
+}
+
+module.exports = {
+    verifyToken,
+    generateToken
+}

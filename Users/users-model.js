@@ -1,0 +1,32 @@
+const db = require("../data/config");
+
+const find = () => {
+    return db("users").select("id", "username", "first_name", "last_name", "occupation");
+}
+
+const findUser = (id) => {
+    return db("users").where({id}).select("id", "username","first_name", "last_name", "occupation", "interests", "experience", "description");
+}
+
+const add = async (user) => {
+    const [id] = await db("users").insert(user);
+    return findUser(id);
+}
+
+const remove = (id) => {
+    return db("users").where({id}).del();
+}
+
+const update = (id, changes) => {
+    await db("users").where({id}).update(changes);
+
+    return findUser(id);
+}
+
+module.exports = {
+    find,
+    findUser,
+    add,
+    remove,
+    update
+}

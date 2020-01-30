@@ -15,7 +15,7 @@ module.exports = {
   development: {
     ...sqlite, 
     connection: {
-      filename: './dev.sqlite3'
+      filename: './data/dev.sqlite3'
     }, 
     pool: {
       afterCreate: (conn, done) => {
@@ -27,7 +27,7 @@ module.exports = {
   test: {
     ...sqlite,
     connection: {
-      filename: './test.sqlite3',
+      filename: './data/test.sqlite3',
     },
   },
 
