@@ -2,6 +2,8 @@ const express = require("express");
 
 const cors = require("cors");
 
+const usersRoute = require("./Users/users-route");
+
 const PORT = process.env.PORT || 5000;
 
 const HOST = process.env.HOST;
@@ -15,6 +17,8 @@ server.use(express.json());
 server.use(helmet());
 
 server.use(cors());
+
+server.use("/users", usersRoute);
 
 server.use((err, req, res, next) => {
     console.log(err);

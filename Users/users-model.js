@@ -5,7 +5,7 @@ const find = () => {
 }
 
 const findUser = (id) => {
-    return db("users").where({id}).select("id", "username","first_name", "last_name", "occupation", "interests", "experience", "description");
+    return db("users").where({id}).first("id", "username","first_name", "last_name", "occupation", "interest", "experience", "description");
 }
 
 const add = async (user) => {
@@ -17,10 +17,14 @@ const remove = (id) => {
     return db("users").where({id}).del();
 }
 
-const update = (id, changes) => {
+const update = async (id, changes) => {
     await db("users").where({id}).update(changes);
 
     return findUser(id);
+}
+
+const findBy = (filter) => {
+    return db("users").where(filter).first();
 }
 
 module.exports = {
@@ -28,5 +32,6 @@ module.exports = {
     findUser,
     add,
     remove,
-    update
+    update,
+    findBy
 }

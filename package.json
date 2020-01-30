@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --verbose --watch",
+    "test": "cross-env NODE_ENV=test jest --verbose",
     "server": "cross-env NODE_ENV=dev nodemon index.js",
     "start": "cross-env NODE_ENV=prod node index.js"
   },
@@ -25,6 +25,7 @@
     "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.20.8",
+    "pg": "^7.18.1",
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {

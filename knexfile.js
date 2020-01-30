@@ -12,7 +12,7 @@ const sqlite = {
 
 module.exports = {
 
-  development: {
+  dev: {
     ...sqlite, 
     connection: {
       filename: './data/dev.sqlite3'
@@ -29,22 +29,22 @@ module.exports = {
     connection: {
       filename: './data/test.sqlite3',
     },
+    pool: {
+      afterCreate: (conn, done) => {
+        conn.run("PRAGMA foreign_keys = ON", done)
+      },
+    },
   },
 
-  // production: {
-  //   client: 'postgresql',
-  //   connection: {
-  //     database: 'my_db',
-  //     user:     'username',
-  //     password: 'password'
-  //   },
-  //   pool: {
-  //     min: 2,
-  //     max: 10
-  //   },
-  //   migrations: {
-  //     tableName: 'knex_migrations'
-  //   }
-  // }
+  production: {
+    client: 'pg',
+    connection:'process.env.DB_URL',
+    migrations: {
+      directory: './data/migrations'
+    },
+    seeds: {
+      directory: './data/seeds'
+    }
+  }
 
 };
