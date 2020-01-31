@@ -1,11 +1,11 @@
 const db = require("../data/config");
 
 const find = () => {
-    return db("users").select("id", "username", "first_name", "last_name", "occupation");
+    return db("users").select("id", "username", "name", "occupation", "company", "description");
 }
 
 const findUser = (id) => {
-    return db("users").where({id}).first("id", "username","first_name", "last_name", "occupation", "interest", "experience", "description");
+    return db("users").where({id}).first("id", "username","name", "occupation", "interest", "experience", "description");
 }
 
 const add = async (user) => {
@@ -27,11 +27,16 @@ const findBy = (filter) => {
     return db("users").where(filter).first();
 }
 
+const findCompanies = () => {
+    return db("users").where({company: true}).select("id", "username", "name", "description")
+}
+
 module.exports = {
     find,
     findUser,
     add,
     remove,
     update,
-    findBy
+    findBy,
+    findCompanies,
 }

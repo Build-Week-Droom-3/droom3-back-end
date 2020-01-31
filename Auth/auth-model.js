@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const secret = require("../Secrets/index");
 
 const verifyToken = () => {
-    return async(req, res, next) => {
+    return (req, res, next) => {
         try {
             const token = req.headers.authorization;
             const decoded = jwt.verify(token, secret.jwtSecret);

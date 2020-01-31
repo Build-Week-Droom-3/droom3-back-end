@@ -4,6 +4,10 @@ const cors = require("cors");
 
 const usersRoute = require("./Users/users-route");
 
+const jobRoute = require("./Jobs/jobsRoute");
+
+const matchRoute = require("./Matches/matchesRoute");
+
 const PORT = process.env.PORT || 5000;
 
 const HOST = process.env.HOST;
@@ -19,6 +23,10 @@ server.use(helmet());
 server.use(cors());
 
 server.use("/users", usersRoute);
+
+server.use("/jobs", jobRoute);
+
+server.use("/matches", matchRoute);
 
 server.use((err, req, res, next) => {
     console.log(err);

@@ -1,18 +1,8 @@
-const db = require("./users-model");
+const db = require("./jobs-model");
 const { verifyToken} = require("../Auth/auth-model");
-const { verifyRegister, verifyLogin, registerToken, loginToken} = require("../Middleware/validate");
-const companyRoute = require("./companyRoute")
+const { validateJob } = require("../Middleware/validate");
 const express = require("express");
-
 const router = express.Router();
-
-router.get("/companies", verifyToken(), async(req, res,next) => {
-    try {
-        res.json(await db.findCompanies());
-    } catch(err) {
-        next(err);
-    }
-});
 
 router.get("/", verifyToken(), async (req, res, next) => {
     try {
@@ -24,27 +14,29 @@ router.get("/", verifyToken(), async (req, res, next) => {
 
 router.get("/:id", verifyToken(), async (req, res, next) => {
     try {
-        res.json(await db.findUser(req.params.id));
+        res.json(await db.findJob(req.params.id));
     } catch(err) {
         next(err);
     }
 });
 
-router.post("/", verifyRegister(),registerToken(), async (req, res, next) => {
+router.get("/company/:id", verifyToken(), async(req, res,next) => {
     try {
-        res.json(req.data);
+        const company_id = req.params.id
+        res.json(await db.findBy({company_id}));
+    } catch(err) {
+        next(err);
+    }
+})
+
+router.post("/", verifyToken(), validateJob(), async (req, res, next) => {
+    try {
+        res.json(await db.add(req.body));
     } catch(err) {
         next(err);
     }
 });
 
-router.post("/login",verifyLogin(), loginToken(), async (req, res, next) => {
-    try {
-        res.json(req.data);
-    } catch(err) {
-        next(err);
-    }
-});
 
 router.delete("/:id", verifyToken(), async(req, res, next) => {
     try {
@@ -54,7 +46,7 @@ router.delete("/:id", verifyToken(), async(req, res, next) => {
     }
 });
 
-router.put("/:id", verifyToken(), verifyRegister(), async(req, res, next) => {
+router.put("/:id", verifyToken(), async(req, res, next) => {
     try {
         res.json(await db.update(req.params.id, req.body));
     } catch(err) {
