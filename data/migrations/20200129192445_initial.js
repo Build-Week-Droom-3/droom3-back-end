@@ -27,11 +27,13 @@ exports.up = async function(knex) {
   });
 
   await knex.schema.createTable("user_matches", tbl => {
+      tbl.increments();
+      
       tbl.boolean("match").defaultTo(0);
       tbl.integer("user_id").notNullable().references("id").inTable("users").onUpdate("CASCADE").onDelete("CASCADE");
       tbl.integer("job_id").notNullable().references("id").inTable("jobs").onUpdate("CASCADE").onDelete("CASCADE");
       
-      tbl.primary(["user_id", "job_id"]);
+      // tbl.primary(["user_id", "job_id"]);
   });
 
 };

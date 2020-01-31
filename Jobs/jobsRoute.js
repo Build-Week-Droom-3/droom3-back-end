@@ -27,7 +27,7 @@ router.get("/company/:id", verifyToken(), async(req, res,next) => {
     } catch(err) {
         next(err);
     }
-})
+});
 
 router.post("/", verifyToken(), validateJob(), async (req, res, next) => {
     try {
