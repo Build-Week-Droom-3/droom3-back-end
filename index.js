@@ -22,7 +22,7 @@ server.use(helmet());
 
 server.use(cors());
 
-server.use("/docs", express.static("./docs"));
+server.use("/", express.static("./docs"));
 
 server.use("/users", usersRoute);
 
