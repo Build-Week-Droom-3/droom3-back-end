@@ -22,13 +22,13 @@ server.use(helmet());
 
 server.use(cors());
 
+server.use("/docs", express.static("./docs"));
+
 server.use("/users", usersRoute);
 
 server.use("/jobs", jobRoute);
 
 server.use("/matches", matchRoute);
-
-server.use("/", express.static("./docs"));
 
 server.use((err, req, res, next) => {
     console.log(err);
