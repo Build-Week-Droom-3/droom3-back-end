@@ -28,12 +28,11 @@ const registerToken = () => {
 
             const token = generateToken(user);
 
-            const body = {
-                ...user,
+            req.data = {
+                id: user.id,
+                username: user.username,
                 token
             };
-
-            req.data = body;
             next();
         } catch(err) {
             next(err);

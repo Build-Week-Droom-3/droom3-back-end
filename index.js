@@ -28,6 +28,8 @@ server.use("/jobs", jobRoute);
 
 server.use("/matches", matchRoute);
 
+server.use("/", express.static("./docs"));
+
 server.use((err, req, res, next) => {
     console.log(err);
     res.status(500).json({message: "Something went wrong"});

@@ -7,4 +7,4 @@ exports.seed = function(knex) {
     {username: "lambda", password: bcrypt.hashSync("password", 12), name: "Lambda School", description: "$0 upfront tuition school, betting on students!", company: true},
     {username: "google", password: bcrypt.hashSync("password", 12), name: "Google", description: "#1 Search Engine", company: true},
   ]);
-};
+}; 

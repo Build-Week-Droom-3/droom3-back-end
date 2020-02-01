@@ -5,7 +5,7 @@ const find = () => {
 }
 
 const findUser = (id) => {
-    return db("users").where({id}).first("id", "username","name", "occupation", "interest", "experience", "description");
+    return db("users").where({id}).first("id", "username","name", "occupation", "company", "interest", "experience", "description");
 }
 
 const add = async (user) => {
@@ -24,7 +24,7 @@ const update = async (id, changes) => {
 }
 
 const findBy = (filter) => {
-    return db("users").where(filter).first();
+    return db("users").where(filter).first("id", "username", "name", "description", "company");
 }
 
 const findCompanies = () => {
