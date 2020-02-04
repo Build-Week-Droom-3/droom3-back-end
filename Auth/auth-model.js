@@ -10,7 +10,7 @@ const verifyToken = () => {
                 req.decoded = decoded.subject;
                 next();
             } else {
-                return res.status(400).json({message: "You are not authorized"});
+                return res.status(401).json({message: "You are not authorized"});
             }
         } catch(err) {
             next(err);
