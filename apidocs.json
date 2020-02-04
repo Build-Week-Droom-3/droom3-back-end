@@ -1,4 +1,7 @@
 {
     "name": "Droom",
-    "url": "https://droom-be.herokuapp.com/"
+    "apidoc": {
+        "title": "Droom API",
+        "url": "https://droom-be.herokuapp.com"
+    }
 }

@@ -81,7 +81,14 @@ define({ "api": [
             "description": "<p>Job ID</p>"
           }
         ]
-      }
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": " HTTP/1.1 201 Created\n {\n  \"id\": 3,\n  \"match\": true,\n  \"user_id\": 2,\n  \"job_id\": 2\n}",
+          "type": "json"
+        }
+      ]
     },
     "version": "0.0.0",
     "filename": "./Matches/matchesRoute.js",
