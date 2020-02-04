@@ -29,13 +29,14 @@ const registerToken = () => {
             const user = await db.add(req.body);
 
             const token = generateToken(user);
-
-            req.data = {
-                id: user.id,
-                username: user.username,
-                token
-            };
-            next();
+            if (user && token) {
+                req.data = {
+                    id: user.id,
+                    username: user.username,
+                    token
+                };
+                next();
+            }
         } catch(err) {
             next(err);
         }

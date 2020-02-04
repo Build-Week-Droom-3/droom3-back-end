@@ -9,7 +9,7 @@ const findUser = (id) => {
 }
 
 const add =(user) => {
-    return db("users").insert(user).returning("id", "username","name", "occupation", "company", "interest", "experience", "description");
+    return db("users").insert(user).returning("*");
 }
 
 const remove = (id) => {
