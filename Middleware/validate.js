@@ -44,7 +44,7 @@ const registerToken = () => {
 const loginToken = () => {
     return async (req, res, next) => {
         try {
-            const { username, password} = req.body;
+            const { username, password } = req.body;
             const user = await db.findBy({username});
 
             const validPassword = bcrypt.compareSync(password, user.password);

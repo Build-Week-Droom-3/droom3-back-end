@@ -8,9 +8,8 @@ const findUser = (id) => {
     return db("users").where({id}).first("id", "username","name", "occupation", "company", "interest", "experience", "description");
 }
 
-const add = async (user) => {
-    const [id] = await db("users").insert(user);
-    return findUser(id);
+const add =(user) => {
+    return db("users").insert(user).returning("id", "username","name", "occupation", "company", "interest", "experience", "description");
 }
 
 const remove = (id) => {
@@ -18,17 +17,19 @@ const remove = (id) => {
 }
 
 const update = async (id, changes) => {
-    await db("users").where({id}).update(changes);
-
-    return findUser(id);
+   return db("users").where({id}).update(changes).returning("id", "username","name", "occupation", "company", "interest", "experience", "description");
 }
 
 const findBy = (filter) => {
-    return db("users").where(filter).first("id", "username", "name", "description", "company");
+    return db("users").where(filter).first();
 }
 
 const findCompanies = () => {
     return db("users").where({company: true}).select("id", "username", "name", "description")
+}
+
+const findAllUsers = () => {
+    return db("users").where({company: false}).select("id", "username", "name", "occupation", "interest", "experience", "description");
 }
 
 module.exports = {
@@ -39,4 +40,5 @@ module.exports = {
     update,
     findBy,
     findCompanies,
+    findAllUsers
 }

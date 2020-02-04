@@ -13,7 +13,7 @@ router.get("/companies", verifyToken(), async(req, res,next) => {
 
 router.get("/companies/:id", verifyToken(), async(req, res, next) => {
     try {
-        res.json(await db.findCompany(req.params.id));
+        res.json(await db.findUser(req.params.id));
     } catch(err) {
         next(err);
     }

@@ -8,6 +8,51 @@ const { verifyToken } = require("../Auth/auth-model");
 
 const data = require("../data/config");
 
+
+
+// *** GET REQUEST COMPANY MATCHES *** //
+
+/**
+ * @api {get} /matches/company/:id Get all of a specific company's matches
+ * @apiName GetCompanyMatches
+ * @apiGroup Matches
+ * 
+ * @apiParam {Number} id Company's ID
+ * 
+ * @apiSuccess {Number} id Match ID
+ * @apiSuccess {Number} user_id ID of user
+ * @apiSuccess {number} job_id ID of job
+ * @apiSuccess {String} description Description of job
+ * @apiSuccess {String} type Type of job
+ * 
+ * @apiSuccessExample Success-Response:
+ *      HTTP/1.1 200 OK
+ *      [
+ *          {   
+ *              "id": 2,
+ *              "user_id": 1,
+ *              "job_id": 2,
+ *              "description": "React Developer with 2 years experience ",
+ *              "type": "Software"
+ *          },
+ *          {
+ *              "id":3,
+ *              "user_id": 2,
+ *              "job_id": 2,
+ *              "description": "React Developer with 2 years experience ",
+ *              "type": "Software"
+ *          }
+ *      ]
+ * 
+ * @apiError CompanyNotFound Company was not found
+ * 
+ * @apiErrorExample Error-Response:
+ *      HTTP/1.1 404 Not Found
+ *      {
+ *          "message":"Company not found"
+ *      }
+ */
+
 router.get("/company/:id", verifyToken(), async (req, res, next) => {
     try {
         res.json(await db.findCompanyMatches(req.params.id))
@@ -15,6 +60,45 @@ router.get("/company/:id", verifyToken(), async (req, res, next) => {
         next(err);
     }
 });
+
+
+// *** GET REQUEST USER MATCHES *** //
+
+/**
+ * @api {get} /user/:id Get User's matches
+ * @apiName GetUserMatches
+ * @apiGroup Matches
+ * 
+ * @apiParam {Number} id User's ID
+ * 
+ * @apiSuccess {Number} id Match ID
+ * @apiSuccess {Number} job_id Job ID
+ * @apiSuccess {Number} company_id ID of Company
+ * @apiSuccess {String} title Job title
+ * @apiSuccess {String} type Job type
+ * @apiSuccess {String} description Description of job
+ * 
+ * @apiSuccessExample Success-Response:
+ *      HTTP/1.1 200 OK
+ *      [
+ *          {
+ *              "id": 2,
+ *              "job_id": 2,
+ *              "company_id": 4,
+ *              "title": "React Developer",
+ *              "type": "Software",
+ *              "description": "React developer with 2 years experience"
+ *          }
+ *      ]
+ * 
+ * @apiError UserNotFound User was not found
+ * 
+ * @apiErrorExample Error-Response:
+ *      HTTP/1.1 404 Not Found
+ *      {
+ *          "message":"User not found"
+ *      }
+ */
 
 router.get("/user/:id", verifyToken(), async (req, res, next) => {
     try {
