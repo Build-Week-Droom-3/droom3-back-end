@@ -38,5 +38,9 @@
   },
   "jest": {
     "testEnvironment": "node"
+  },
+  "apidoc": {
+    "title": "Droom API",
+    "url": "https://droom-be.herokuapp.com"
   }
 }
