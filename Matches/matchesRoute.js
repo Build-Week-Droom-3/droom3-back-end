@@ -114,7 +114,7 @@ router.get("/user/:id", verifyToken(), validateUser(), async (req, res, next) =>
 /**
  * @api {get} /matches/:id Get company's user applications
  * @apiName GetCompanyApplications
- * @apiGroup Matches SHOULD MOVE TO USERS ?
+ * @apiGroup Matches
  * 
  * @apiParam {Number} id Company ID
  * 
@@ -158,7 +158,7 @@ router.get("/:id", verifyToken(), validateCompany(), async(req, res, next) => {
 
 
 
-
+// UNUSED FOR NOW
 router.get("/", verifyToken(), async(req, res, next) => {
     try {
         res.json(await data("user_matches").select())
@@ -188,7 +188,7 @@ router.get("/", verifyToken(), async(req, res, next) => {
  *       "match": true,
  *       "user_id": 2,
  *       "job_id": 2
- *     }
+ *      }
  * 
  * 
  */
@@ -205,6 +205,31 @@ router.post("/:id",verifyToken(), async (req, res, next) => {
 
 /**
  * @api {post} /matches/user Apply user for job
+ * @apiName UserApply
+ * @apiGroup Matches
+ * 
+ * @apiParam {Number} user_id User's ID
+ * @apiParam {Number} job_id Job ID
+ * 
+ * @apiSuccess {Number} id Match ID
+ * @apiSuccess {Number} user_id User's ID
+ * @apiSuccess {Number} job_id Job ID
+ * 
+ * @apiSuccessExample Success-Response:
+ *      HTTP/1.1 201 Created
+ *      {
+ *       "id": 4,
+ *       "user_id": 2,
+ *       "job_id": 1
+ *     }
+ * 
+ * @apiError MissingFields Missing required fields
+ * 
+ * @apiErrorExample Error-Response:
+ *      HTTP/1.1 400 Bad Request
+ *      {
+ *          "message":"Missing fields"
+ *      }
  */
 
 //add user match to user_matches

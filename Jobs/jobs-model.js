@@ -8,9 +8,8 @@ const findJob = (id) => {
     return db("jobs").where({id}).first();
 }
 
-const add = async (job) => {
-    const [id] = await db("jobs").insert(job);
-    return findJob(id);
+const add = (job) => {
+   return db("jobs").insert(job).returning('*');
 }
 
 const remove = (id) => {
@@ -18,13 +17,11 @@ const remove = (id) => {
 }
 
 const update = async (id, changes) => {
-    await db("jobs").where({id}).update(changes);
-
-    return findJob(id);
+   return db("jobs").where({id}).update(changes).returning('*');
 }
 
 const findBy = (filter) => {
-    return db("jobs").where(filter).first();
+    return db("jobs").where(filter);
 }
 
 module.exports = {

@@ -216,7 +216,7 @@ router.post("/", verifyRegister(),registerToken(), async (req, res, next) => {
  * @apiError InvalidCredentials The Username or Password is incorrect
  *
  * @apiErrorExample Error-Response:
- *     HTTP/1.1 404 Not Found
+ *     HTTP/1.1 401 Unauthorized
  *     {
  *       "message": "Invalid Credentials"
  *     }

@@ -1,6 +1,8 @@
 const { generateToken } = require("../Auth/auth-model");
 const db = require("../Users/users-model");
 const bcrypt = require("bcryptjs");
+const jobDB = require("../Jobs/jobs-model");
+
 
 const verifyRegister = () => {
     return (req, res, next) => {
@@ -91,10 +93,10 @@ const validateUserToken = () => {
     }
 }
 
-const validateJob = () => {
+const validateJobField = () => {
     return async (req, res, next) => {
-        if (!req.body.name || !req.body.company_id || !req.body.name || !req.body.type) {
-            return res.status(400).json({message: "Please provide all required fields"});
+        if (!req.body.name || !req.body.company_id || !req.body.type) {
+            return res.status(400).json({message: "Missing fields"});
         }
         next();
     }
@@ -146,6 +148,23 @@ const validateUserMatch = () => {
     }
 }
 
+const validateJob = () => {
+    return async (req, res, next) => {
+        try {
+            const job = await jobDB.findJob(req.params.id);
+
+            if (job) {
+                req.job = job;
+                next();
+            } else {
+                return res.status(404).json({message: "No job with specified ID"});
+            }
+        } catch(err) {
+            next(err);
+        }
+    }
+}
+
 module.exports = {
     verifyLogin,
     verifyLogin,
@@ -154,6 +173,7 @@ module.exports = {
     registerToken,
     loginToken,
     validateJob,
+    validateJobField,
     validateCompany,
     validateUser,
     validateUserMatch

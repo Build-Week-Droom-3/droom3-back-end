@@ -1,15 +1,5 @@
 [
   {
-    "type": "post",
-    "url": "/matches/user",
-    "title": "Apply user for job",
-    "version": "0.0.0",
-    "filename": "./Matches/matchesRoute.js",
-    "group": "C:\\Users\\Daniel\\droom3-back-end\\Matches\\matchesRoute.js",
-    "groupTitle": "C:\\Users\\Daniel\\droom3-back-end\\Matches\\matchesRoute.js",
-    "name": "PostMatchesUser"
-  },
-  {
     "success": {
       "fields": {
         "Success 200": [
@@ -36,6 +26,502 @@
     "group": "C:\\Users\\Daniel\\droom3-back-end\\docs\\main.js",
     "groupTitle": "C:\\Users\\Daniel\\droom3-back-end\\docs\\main.js",
     "name": ""
+  },
+  {
+    "type": "post",
+    "url": "/jobs",
+    "title": "Add job",
+    "name": "AddJob",
+    "group": "Jobs",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Job title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "company_id",
+            "description": "<p>Company ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Job type</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Job description, can be NULL</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Job ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Job title</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "company_id",
+            "description": "<p>Company ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Job type</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Job description, can be NULL</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 201 Created\n{\n    \"id\": 4,\n    \"name\": \"Node.js Engineer\",\n    \"company_id\": 4,\n    \"type\": \"Software\",\n    \"description\": \"Looking for a developer with 4 years of Node.js experience\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Missingfields",
+            "description": "<p>Missing required fields</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n    \"message\": \"Missing fields\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./Jobs/jobsRoute.js",
+    "groupTitle": "Jobs"
+  },
+  {
+    "type": "delete",
+    "url": "/jobs/:id",
+    "title": "Delete Job",
+    "name": "DeleteJob",
+    "group": "Jobs",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Job ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "count",
+            "description": "<p>Count of jobs deleted</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./Jobs/jobsRoute.js",
+    "groupTitle": "Jobs"
+  },
+  {
+    "type": "get",
+    "url": "/jobs/company/:id",
+    "title": "Get all jobs from company",
+    "name": "GetCompanysJobs",
+    "group": "Jobs",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Company ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Job ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "company_id",
+            "description": "<p>Company ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Job title</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Job type</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Description of job</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n[\n    {\n        \"id\": 2,\n        \"company_id\": 4,\n        \"name\": \"React Developer\",\n        \"type\": \"Software\",\n        \"description\": \"React developer with 2 years experience\"\n    }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "CompanyNotFound",
+            "description": "<p>Company not found</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n    \"message\": \"Company not found\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./Jobs/jobsRoute.js",
+    "groupTitle": "Jobs"
+  },
+  {
+    "type": "get",
+    "url": "/jobs/:id",
+    "title": "Get specific job",
+    "name": "GetJob",
+    "group": "Jobs",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Job ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Job ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "company_id",
+            "description": "<p>Company ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Job title</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Job type</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Description of job</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"id\": 1,\n    \"company_id\": 3,\n    \"name\": \"Software Engineer\",\n    \"type\": \"Software\",\n    \"description\": \"Build awesome things with us!\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "JobNotFound",
+            "description": "<p>No Job Found</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Respone: ",
+          "content": "HTTP/1.1 404 Not Found\n{\n    \"message\": No job with specified ID\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./Jobs/jobsRoute.js",
+    "groupTitle": "Jobs"
+  },
+  {
+    "type": "get",
+    "url": "/jobs",
+    "title": "Get a list of all jobs",
+    "name": "GetJobs",
+    "group": "Jobs",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Job ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "company_id",
+            "description": "<p>Company ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Job title</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Job type</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Description of job</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n[\n    {\n        \"id\": 1,\n        \"company_id\": 3,\n        \"name\": \"Software Engineer\",\n        \"type\": \"Software\",\n        \"description\": \"Build awesome things with us!\"\n    },\n    {\n        \"id\": 2,\n        \"company_id\": 4,\n        \"name\": \"React Developer\",\n        \"type\": \"Software\",\n        \"description\": \"React Developer with 2 years experience\"\n    }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./Jobs/jobsRoute.js",
+    "groupTitle": "Jobs"
+  },
+  {
+    "type": "put",
+    "url": "/jobs/:id",
+    "title": "Update Job",
+    "name": "UpdateJob",
+    "group": "Jobs",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Job title</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "company_id",
+            "description": "<p>Company ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Job type</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Job description, can be NULL</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Job ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>Job title</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "company_id",
+            "description": "<p>Company ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Job type</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Job description, can be NULL</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"id\": 4,\n    \"name\": \"Node.js Engineer\",\n    \"company_id\": 4,\n    \"type\": \"Software\",\n    \"description\": \"Looking for a developer with 4 years of Node.js experience\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Missingfields",
+            "description": "<p>Missing required fields</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 400 Bad Request\n{\n    \"message\": \"Missing fields\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./Jobs/jobsRoute.js",
+    "groupTitle": "Jobs"
   },
   {
     "type": "post",
@@ -85,7 +571,97 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": " HTTP/1.1 201 Created\n {\n  \"id\": 3,\n  \"match\": true,\n  \"user_id\": 2,\n  \"job_id\": 2\n}",
+          "content": "HTTP/1.1 201 Created\n{\n \"id\": 3,\n \"match\": true,\n \"user_id\": 2,\n \"job_id\": 2\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./Matches/matchesRoute.js",
+    "groupTitle": "Matches"
+  },
+  {
+    "type": "get",
+    "url": "/matches/:id",
+    "title": "Get company's user applications",
+    "name": "GetCompanyApplications",
+    "group": "Matches",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Company ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User's ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "job_id",
+            "description": "<p>Job ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>Job title</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Description of job</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Type of job</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n[\n    {\n        \"user_id\": 1,\n        \"job_id\": 1,\n        \"title\": \"Software Engineer\",\n        \"type\": \"Software\",\n        \"description\": \"Node.js experience preferred\"\n    }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "CompanyNotFound",
+            "description": "<p>Company was not found</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n    \"message\":\"Company not found\"\n}",
           "type": "json"
         }
       ]
@@ -282,11 +858,11 @@
     "groupTitle": "Matches"
   },
   {
-    "type": "get",
-    "url": "/matches/:id",
-    "title": "Get company's user applications",
-    "name": "GetCompanyApplications",
-    "group": "Matches_SHOULD_MOVE_TO_USERS_?",
+    "type": "post",
+    "url": "/matches/user",
+    "title": "Apply user for job",
+    "name": "UserApply",
+    "group": "Matches",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -294,8 +870,15 @@
             "group": "Parameter",
             "type": "Number",
             "optional": false,
-            "field": "id",
-            "description": "<p>Company ID</p>"
+            "field": "user_id",
+            "description": "<p>User's ID</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "job_id",
+            "description": "<p>Job ID</p>"
           }
         ]
       }
@@ -303,6 +886,13 @@
     "success": {
       "fields": {
         "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Match ID</p>"
+          },
           {
             "group": "Success 200",
             "type": "Number",
@@ -316,34 +906,13 @@
             "optional": false,
             "field": "job_id",
             "description": "<p>Job ID</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "title",
-            "description": "<p>Job title</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "description",
-            "description": "<p>Description of job</p>"
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
-            "field": "type",
-            "description": "<p>Type of job</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n[\n    {\n        \"user_id\": 1,\n        \"job_id\": 1,\n        \"title\": \"Software Engineer\",\n        \"type\": \"Software\",\n        \"description\": \"Node.js experience preferred\"\n    }\n]",
+          "content": " HTTP/1.1 201 Created\n {\n  \"id\": 4,\n  \"user_id\": 2,\n  \"job_id\": 1\n}",
           "type": "json"
         }
       ]
@@ -354,22 +923,22 @@
           {
             "group": "Error 4xx",
             "optional": false,
-            "field": "CompanyNotFound",
-            "description": "<p>Company was not found</p>"
+            "field": "MissingFields",
+            "description": "<p>Missing required fields</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n    \"message\":\"Company not found\"\n}",
+          "content": "HTTP/1.1 400 Bad Request\n{\n    \"message\":\"Missing fields\"\n}",
           "type": "json"
         }
       ]
     },
     "version": "0.0.0",
     "filename": "./Matches/matchesRoute.js",
-    "groupTitle": "Matches_SHOULD_MOVE_TO_USERS_?"
+    "groupTitle": "Matches"
   },
   {
     "type": "delete",
@@ -715,7 +1284,7 @@
       "examples": [
         {
           "title": "Error-Response:",
-          "content": "HTTP/1.1 404 Not Found\n{\n  \"message\": \"Invalid Credentials\"\n}",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n  \"message\": \"Invalid Credentials\"\n}",
           "type": "json"
         }
       ]
