@@ -1,6 +1,6 @@
 const db = require("./users-model");
 const { verifyToken} = require("../Auth/auth-model");
-const { verifyRegister, verifyLogin, registerToken, loginToken} = require("../Middleware/validate");
+const { verifyRegister, verifyLogin, registerToken, loginToken, validateUser} = require("../Middleware/validate");
 const express = require("express");
 
 const router = express.Router();
@@ -137,7 +137,7 @@ router.get("/", verifyToken(), async (req, res, next) => {
  *      }
  */
 
-router.get("/:id", verifyToken(), async (req, res, next) => {
+router.get("/:id", verifyToken(), validateUser(), async (req, res, next) => {
     try {
         res.json(await db.findUser(req.params.id));
     } catch(err) {
@@ -169,7 +169,7 @@ router.get("/:id", verifyToken(), async (req, res, next) => {
  * @apiSuccessExample Success-Response:
  *      HTTP/1.1 201 Created
  *     {
- *       "id": "1",
+ *       "id": 1,
  *       "username": "example",
  *       "token": "randomTokenHere"
  *     }
@@ -244,7 +244,7 @@ router.post("/login",verifyLogin(), loginToken(), async (req, res, next) => {
  * 
  */
 
-router.delete("/:id", verifyToken(), async(req, res, next) => {
+router.delete("/:id", verifyToken(), validateUser(), async(req, res, next) => {
     try {
         res.json(await db.remove(req.params.id));
     } catch(err) {
@@ -302,7 +302,7 @@ router.delete("/:id", verifyToken(), async(req, res, next) => {
  *      }
  */
 
-router.put("/:id", verifyToken(), verifyRegister(), async(req, res, next) => {
+router.put("/:id", verifyToken(), validateUser(), verifyRegister(), async(req, res, next) => {
     try {
         const user = await db.update(req.params.id, req.body)
         if (user) {

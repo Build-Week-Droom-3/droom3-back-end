@@ -32,6 +32,10 @@ const findAllUsers = () => {
     return db("users").where({company: false}).select("id", "username", "name", "occupation", "interest", "experience", "description");
 }
 
+const findCompany = (id) => {
+    return db("users").where({id, company: true}).first();
+}
+
 module.exports = {
     find,
     findUser,
@@ -40,5 +44,6 @@ module.exports = {
     update,
     findBy,
     findCompanies,
-    findAllUsers
+    findAllUsers,
+    findCompany
 }

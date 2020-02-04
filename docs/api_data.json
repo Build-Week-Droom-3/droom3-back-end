@@ -1,5 +1,15 @@
 [
   {
+    "type": "post",
+    "url": "/matches/user",
+    "title": "Apply user for job",
+    "version": "0.0.0",
+    "filename": "./Matches/matchesRoute.js",
+    "group": "C:\\Users\\Daniel\\droom3-back-end\\Matches\\matchesRoute.js",
+    "groupTitle": "C:\\Users\\Daniel\\droom3-back-end\\Matches\\matchesRoute.js",
+    "name": "PostMatchesUser"
+  },
+  {
     "success": {
       "fields": {
         "Success 200": [
@@ -26,6 +36,56 @@
     "group": "C:\\Users\\Daniel\\droom3-back-end\\docs\\main.js",
     "groupTitle": "C:\\Users\\Daniel\\droom3-back-end\\docs\\main.js",
     "name": ""
+  },
+  {
+    "type": "post",
+    "url": "/matches/:id",
+    "title": "Match Company to User",
+    "name": "AddCompanyMatch",
+    "group": "Matches",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Match ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Match ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "job_id",
+            "description": "<p>Job ID</p>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "./Matches/matchesRoute.js",
+    "groupTitle": "Matches"
   },
   {
     "type": "get",
@@ -213,6 +273,96 @@
     "version": "0.0.0",
     "filename": "./Matches/matchesRoute.js",
     "groupTitle": "Matches"
+  },
+  {
+    "type": "get",
+    "url": "/matches/:id",
+    "title": "Get company's user applications",
+    "name": "GetCompanyApplications",
+    "group": "Matches_SHOULD_MOVE_TO_USERS_?",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>Company ID</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "user_id",
+            "description": "<p>User's ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "job_id",
+            "description": "<p>Job ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "title",
+            "description": "<p>Job title</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>Description of job</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "type",
+            "description": "<p>Type of job</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n[\n    {\n        \"user_id\": 1,\n        \"job_id\": 1,\n        \"title\": \"Software Engineer\",\n        \"type\": \"Software\",\n        \"description\": \"Node.js experience preferred\"\n    }\n]",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "CompanyNotFound",
+            "description": "<p>Company was not found</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n    \"message\":\"Company not found\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./Matches/matchesRoute.js",
+    "groupTitle": "Matches_SHOULD_MOVE_TO_USERS_?"
   },
   {
     "type": "delete",
@@ -664,7 +814,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": " HTTP/1.1 201 Created\n{\n  \"id\": \"1\",\n  \"username\": \"example\",\n  \"token\": \"randomTokenHere\"\n}",
+          "content": " HTTP/1.1 201 Created\n{\n  \"id\": 1,\n  \"username\": \"example\",\n  \"token\": \"randomTokenHere\"\n}",
           "type": "json"
         }
       ]

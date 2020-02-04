@@ -67,7 +67,7 @@ const loginToken = () => {
     }
 }
 
-const validateUser = () => {
+const validateUserToken = () => {
     return async (req, res, next) => {
         const username = req.decoded.username;
 
@@ -83,7 +83,7 @@ const validateUser = () => {
                 }
                 next();
             } else {
-                return res.status(500).json({message: "No user with specified username"});
+                return res.status(404).json({message: "No user with specified username"});
             }
         } else {
             return res.status(500).json({message: "Please provide all required credentials"});
@@ -100,12 +100,61 @@ const validateJob = () => {
     }
 }
 
+const validateCompany = () => {
+    return async (req, res, next) => {
+        try {
+            const user = await db.findCompany(req.params.id);
+
+            if (user) {
+                req.user = user;
+                next();
+            } else {
+                return res.status(404).json({message: "Company not found"});
+            }
+        }catch(err) {
+            next(err);
+        }
+    }
+}
+
+const validateUser = () => {
+    return async (req, res, next) => {
+        try {
+            const user = await db.findUser(req.params.id);
+
+            if (user) {
+                req.user = user;
+                next();
+            } else {
+                return res.status(404).json({message: "User not found"});
+            }
+        } catch(err) {
+            next(err);
+        }
+    }
+}
+
+const validateUserMatch = () => {
+    return async (req, res, next) => {
+        try {
+            if (!req.body.user_id || !req.body.job_id) {
+                return res.status(400).json({message: "Missing fields"});
+            }
+        } catch(err) {
+            next(err);
+        }
+    }
+}
+
 module.exports = {
     verifyLogin,
     verifyLogin,
     verifyRegister,
-    validateUser,
+    validateUserToken,
     registerToken,
     loginToken,
-    validateJob
+    validateJob,
+    validateCompany,
+    validateUser,
+    validateUserMatch
 }

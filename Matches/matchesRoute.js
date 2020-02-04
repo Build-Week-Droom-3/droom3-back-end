@@ -8,7 +8,7 @@ const { verifyToken } = require("../Auth/auth-model");
 
 const data = require("../data/config");
 
-
+const { validateCompany, validateUser, validateUserMatch} = require("../Middleware/validate");
 
 // *** GET REQUEST COMPANY MATCHES *** //
 
@@ -53,7 +53,7 @@ const data = require("../data/config");
  *      }
  */
 
-router.get("/company/:id", verifyToken(), async (req, res, next) => {
+router.get("/company/:id", verifyToken(), validateCompany(), async (req, res, next) => {
     try {
         res.json(await db.findCompanyMatches(req.params.id))
     } catch(err){
@@ -100,7 +100,7 @@ router.get("/company/:id", verifyToken(), async (req, res, next) => {
  *      }
  */
 
-router.get("/user/:id", verifyToken(), async (req, res, next) => {
+router.get("/user/:id", verifyToken(), validateUser(), async (req, res, next) => {
     try {
         res.json(await db.findUserMatches(req.params.id));
     } catch(err){
@@ -108,14 +108,56 @@ router.get("/user/:id", verifyToken(), async (req, res, next) => {
     }
 });
 
+
+// *** GET REQUEST ALL COMPANY'S MATCHES/APPLICATIONS *** //
+
+/**
+ * @api {get} /matches/:id Get company's user applications
+ * @apiName GetCompanyApplications
+ * @apiGroup Matches SHOULD MOVE TO USERS ?
+ * 
+ * @apiParam {Number} id Company ID
+ * 
+ * @apiSuccess {Number} user_id User's ID
+ * @apiSuccess {Number} job_id Job ID
+ * @apiSuccess {String} title Job title
+ * @apiSuccess {String} description Description of job
+ * @apiSuccess {String} type Type of job
+ * 
+ * @apiSuccessExample Success-Response:
+ *      HTTP/1.1 200 OK
+ *      [
+ *          {
+ *              "user_id": 1,
+ *              "job_id": 1,
+ *              "title": "Software Engineer",
+ *              "type": "Software",
+ *              "description": "Node.js experience preferred"
+ *          }
+ *      ]
+ * 
+ * @apiError CompanyNotFound Company was not found
+ * 
+ * @apiErrorExample Error-Response:
+ *      HTTP/1.1 404 Not Found
+ *      {
+ *          "message":"Company not found"
+ *      }
+ * 
+ */
+
+
 //find all user_matches with company_id == user.id of company
-router.get("/:id", verifyToken(), async(req, res, next) => {
+router.get("/:id", verifyToken(), validateCompany(), async(req, res, next) => {
     try {
         res.json(await db.findCompanyUserMatches(req.params.id));
     }catch(err) {
         next(err);
     }
 });
+
+
+
 
 router.get("/", verifyToken(), async(req, res, next) => {
     try {
@@ -125,6 +167,32 @@ router.get("/", verifyToken(), async(req, res, next) => {
     }
 });
 
+
+// *** POST REQUEST MATCH COMPANY TO USER *** //
+
+/**
+ * @api {post} /matches/:id Match Company to User
+ * @apiName AddCompanyMatch
+ * @apiGroup Matches
+ * 
+ * @apiParam {Number} id Match ID
+ * 
+ * @apiSuccess {Number} id Match ID
+ * @apiSuccess {Number} user_id User ID
+ * @apiSuccess {Number} job_id Job ID
+ * 
+ * @apiSuccessExample Success-Response:
+ *      HTTP/1.1 201 Created
+ *      {
+ *       "id": 3,
+ *       "match": true,
+ *       "user_id": 2,
+ *       "job_id": 2
+ *     }
+ * 
+ * 
+ */
+
 router.post("/:id",verifyToken(), async (req, res, next) => {
     try {
         res.status(201).json(await db.addCompanyMatch(req.params.id));
@@ -133,8 +201,14 @@ router.post("/:id",verifyToken(), async (req, res, next) => {
     }
 });
 
+// *** POST REQUEST ADD USER MATCH TO TABLE *** //
+
+/**
+ * @api {post} /matches/user Apply user for job
+ */
+
 //add user match to user_matches
-router.post("/user", verifyToken(), async(req, res, next) => {
+router.post("/user", verifyToken(),validateUserMatch(),async(req, res, next) => {
     try {
         res.status(201).json(await db.addUserMatch(req.body));
     }catch(err) {
