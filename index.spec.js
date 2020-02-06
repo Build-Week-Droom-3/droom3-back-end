@@ -137,6 +137,7 @@ describe("auth route", () => {
 
         expect(res.status).toBe(200);
         expect(res.type).toBe("application/json");
+        expect(res.body.password).toBe(undefined);
         expect(res.body.username).toBe("example");
     });
 });

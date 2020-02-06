@@ -13,7 +13,6 @@ const router = express.Router();
  * 
  * @apiSuccess {Number} id User ID
  * @apiSuccess {String} username User's username
- * @apiSuccess {String} pa
  * @apiSuccess {String} name User's name
  * @apiSuccess {String} occupation User's occupation, can be NULL
  * @apiSuccess {Boolean} company Is user a company or not, 0 for false, 1 for true
@@ -26,7 +25,6 @@ const router = express.Router();
  *      {
  *          "id": 1,
  *          "username": "example",
- *          "password": "password",
  *          "name": "Example User",
  *          "occupation":"Software Developer",
  *          "company": 0,

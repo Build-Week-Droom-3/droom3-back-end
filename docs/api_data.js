@@ -26,13 +26,6 @@ define({ "api": [
             "group": "Success 200",
             "type": "String",
             "optional": false,
-            "field": "pa",
-            "description": ""
-          },
-          {
-            "group": "Success 200",
-            "type": "String",
-            "optional": false,
             "field": "name",
             "description": "<p>User's name</p>"
           },
@@ -76,7 +69,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 200 OK\n{\n    \"id\": 1,\n    \"username\": \"example\",\n    \"password\": \"password\",\n    \"name\": \"Example User\",\n    \"occupation\":\"Software Developer\",\n    \"company\": 0,\n    \"interest\": \"Keyboards, Cars\",\n    \"experience\": \"1 year JavaScript\",\n    \"description\": \"Software Developer in Roanoke !\"\n}",
+          "content": "HTTP/1.1 200 OK\n{\n    \"id\": 1,\n    \"username\": \"example\",\n    \"name\": \"Example User\",\n    \"occupation\":\"Software Developer\",\n    \"company\": 0,\n    \"interest\": \"Keyboards, Cars\",\n    \"experience\": \"1 year JavaScript\",\n    \"description\": \"Software Developer in Roanoke !\"\n}",
           "type": "json"
         }
       ]
