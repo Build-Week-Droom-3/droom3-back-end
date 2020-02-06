@@ -9,7 +9,7 @@ const findUser = (id) => {
 }
 
 const add =(user) => {
-    return db("users").insert(user).returning("*");
+    return db("users").insert(user).then(id => findBy({id: id[0]}));
 }
 
 const remove = (id) => {
@@ -17,7 +17,8 @@ const remove = (id) => {
 }
 
 const update = async (id, changes) => {
-   return db("users").where({id}).update(changes).returning("id", "username","name", "occupation", "company", "interest", "experience", "description");
+   return db("users").where({id}).update(changes).then(() => findBy({id}));
+//    returning("id", "username","name", "occupation", "company", "interest", "experience", "description")
 }
 
 const findBy = (filter) => {

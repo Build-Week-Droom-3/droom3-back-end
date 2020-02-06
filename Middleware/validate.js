@@ -72,24 +72,19 @@ const loginToken = () => {
 
 const validateUserToken = () => {
     return async (req, res, next) => {
-        const username = req.decoded.username;
+        const id = req.decoded.subject;
 
-        if (username) {
-            const user = await db.findBy({username});
+        if (id) {
+            const user = await db.findUser(id);
 
             if (user) {
-                const token = generateToken(user);
-                req.user = {
-                    id: user.id,
-                    username: user.username,
-                    token
-                }
+                req.user = user;
                 next();
             } else {
-                return res.status(404).json({message: "No user with specified username"});
+                return res.status(404).json({message: "User not found"});
             }
         } else {
-            return res.status(500).json({message: "Please provide all required credentials"});
+            return res.status(401).json({message: "You are not authorized"});
         }
     }
 }
@@ -143,6 +138,7 @@ const validateUserMatch = () => {
             if (!req.body.user_id || !req.body.job_id) {
                 return res.status(400).json({message: "Missing fields"});
             }
+            next();
         } catch(err) {
             next(err);
         }

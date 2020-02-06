@@ -7,7 +7,7 @@ const verifyToken = () => {
             const token = req.headers.authorization;
             const decoded = jwt.verify(token, secret.jwtSecret);
             if (token && decoded) {
-                req.decoded = decoded.subject;
+                req.decoded = decoded;
                 next();
             } else {
                 return res.status(401).json({message: "You are not authorized"});

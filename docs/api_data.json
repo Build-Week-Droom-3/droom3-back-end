@@ -1,5 +1,121 @@
 [
   {
+    "type": "get",
+    "url": "/auth",
+    "title": "Get user information",
+    "name": "GetUserInfo",
+    "group": "Auth",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "id",
+            "description": "<p>User ID</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "username",
+            "description": "<p>User's username</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "pa",
+            "description": ""
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "name",
+            "description": "<p>User's name</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "occupation",
+            "description": "<p>User's occupation, can be NULL</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Boolean",
+            "optional": false,
+            "field": "company",
+            "description": "<p>Is user a company or not, 0 for false, 1 for true</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "interest",
+            "description": "<p>User's interests, can be NULL</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "experience",
+            "description": "<p>User's experience, can be NULL</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "description",
+            "description": "<p>User's description, can be NULL</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Success-Response:",
+          "content": "HTTP/1.1 200 OK\n{\n    \"id\": 1,\n    \"username\": \"example\",\n    \"password\": \"password\",\n    \"name\": \"Example User\",\n    \"occupation\":\"Software Developer\",\n    \"company\": 0,\n    \"interest\": \"Keyboards, Cars\",\n    \"experience\": \"1 year JavaScript\",\n    \"description\": \"Software Developer in Roanoke !\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "error": {
+      "fields": {
+        "Error 4xx": [
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "UserNotFound",
+            "description": "<p>User was not found</p>"
+          },
+          {
+            "group": "Error 4xx",
+            "optional": false,
+            "field": "Unauthorized",
+            "description": "<p>You are not logged in</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 404 Not Found\n{\n    \"message\":\"User not found\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Error-Response:",
+          "content": "HTTP/1.1 401 Unauthorized\n{\n    \"message\": \"You are not authorized\"\n}",
+          "type": "json"
+        }
+      ]
+    },
+    "version": "0.0.0",
+    "filename": "./Auth/authRoute.js",
+    "groupTitle": "Auth"
+  },
+  {
     "success": {
       "fields": {
         "Success 200": [
@@ -524,7 +640,7 @@
     "groupTitle": "Jobs"
   },
   {
-    "type": "post",
+    "type": "put",
     "url": "/matches/:id",
     "title": "Match Company to User",
     "name": "AddCompanyMatch",
@@ -571,7 +687,7 @@
       "examples": [
         {
           "title": "Success-Response:",
-          "content": "HTTP/1.1 201 Created\n{\n \"id\": 3,\n \"match\": true,\n \"user_id\": 2,\n \"job_id\": 2\n}",
+          "content": "HTTP/1.1 200 OK\n{\n \"id\": 3,\n \"match\": true,\n \"user_id\": 2,\n \"job_id\": 2\n}",
           "type": "json"
         }
       ]

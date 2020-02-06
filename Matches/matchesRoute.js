@@ -167,11 +167,10 @@ router.get("/", verifyToken(), async(req, res, next) => {
     }
 });
 
-
-// *** POST REQUEST MATCH COMPANY TO USER *** //
+// *** PUT REQUEST MATCH COMPANY TO USER *** //
 
 /**
- * @api {post} /matches/:id Match Company to User
+ * @api {put} /matches/:id Match Company to User
  * @apiName AddCompanyMatch
  * @apiGroup Matches
  * 
@@ -182,7 +181,7 @@ router.get("/", verifyToken(), async(req, res, next) => {
  * @apiSuccess {Number} job_id Job ID
  * 
  * @apiSuccessExample Success-Response:
- *      HTTP/1.1 201 Created
+ *      HTTP/1.1 200 OK
  *      {
  *       "id": 3,
  *       "match": true,
@@ -190,16 +189,16 @@ router.get("/", verifyToken(), async(req, res, next) => {
  *       "job_id": 2
  *      }
  * 
- * 
  */
 
-router.post("/:id",verifyToken(), async (req, res, next) => {
+router.put("/:id",verifyToken(), async (req, res, next) => {
     try {
-        res.status(201).json(await db.addCompanyMatch(req.params.id));
+        res.status(200).json(await db.addCompanyMatch(req.params.id));
     }catch(err) {
         next(err);
     }
 });
+
 
 // *** POST REQUEST ADD USER MATCH TO TABLE *** //
 
@@ -233,11 +232,14 @@ router.post("/:id",verifyToken(), async (req, res, next) => {
  */
 
 //add user match to user_matches
-router.post("/user", verifyToken(),validateUserMatch(),async(req, res, next) => {
+router.post("/", verifyToken(),validateUserMatch(),async(req, res, next) => {
     try {
         res.status(201).json(await db.addUserMatch(req.body));
     }catch(err) {
         next(err);
     }
 });
+
+
+
 module.exports = router;

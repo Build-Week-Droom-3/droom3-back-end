@@ -8,6 +8,8 @@ const jobRoute = require("./Jobs/jobsRoute");
 
 const matchRoute = require("./Matches/matchesRoute");
 
+const authRoute = require("./Auth/authRoute");
+
 const PORT = process.env.PORT || 5000;
 
 const HOST = process.env.HOST;
@@ -29,6 +31,8 @@ server.use("/users", usersRoute);
 server.use("/jobs", jobRoute);
 
 server.use("/matches", matchRoute);
+
+server.use("/auth", authRoute);
 
 server.use((err, req, res, next) => {
     console.log(err);
