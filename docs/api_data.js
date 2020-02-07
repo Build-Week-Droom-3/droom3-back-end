@@ -454,7 +454,7 @@ define({ "api": [
       "examples": [
         {
           "title": "Error-Respone: ",
-          "content": "HTTP/1.1 404 Not Found\n{\n    \"message\": No job with specified ID\n}",
+          "content": "HTTP/1.1 404 Not Found\n{\n    \"message\": \"No job with specified ID\"\n}",
           "type": "json"
         }
       ]

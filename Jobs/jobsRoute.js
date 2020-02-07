@@ -78,7 +78,7 @@ router.get("/", verifyToken(), async (req, res, next) => {
  * @apiErrorExample Error-Respone: 
  *      HTTP/1.1 404 Not Found
  *      {
- *          "message": No job with specified ID
+ *          "message": "No job with specified ID"
  *      }
  */
 
