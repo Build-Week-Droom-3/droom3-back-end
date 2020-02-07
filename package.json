@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=test jest --verbose",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --detectOpenHandles",
     "server": "cross-env NODE_ENV=dev nodemon index.js",
     "start": "node index.js",
     "docs":"apidoc -i ./ -e node_modules -o ./docs"

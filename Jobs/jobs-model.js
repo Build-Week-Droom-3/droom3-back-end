@@ -8,12 +8,8 @@ const findJob = (id) => {
     return db("jobs").where({id}).first();
 }
 
-const findById = (id) => {
-    return db("jobs").where({id}).first()
-}
-
 const add = (job) => {
-   return db("jobs").insert(job).then(id => findById(id[0]));
+   return db("jobs").insert(job).then(id => findJob(id[0]));
 }
 
 const remove = (id) => {
@@ -21,7 +17,7 @@ const remove = (id) => {
 }
 
 const update = async (id, changes) => {
-   return db("jobs").where({id}).update(changes).then(() => findById(id));
+   return db("jobs").where({id}).update(changes).then(() => findJob(id));
 }
 
 const findBy = (filter) => {
@@ -35,5 +31,4 @@ module.exports = {
     remove,
     update,
     findBy,
-    findById
 }

@@ -13,7 +13,7 @@ const findCompanyUserMatches = (company_id) => {
 }
 
 const findMatchById = (user_id) => {
-    return db("user_matches as m").join("users as u", "u.id", "m.user_id").join("jobs as j", "j.id", "m.job_id").where({"u.id":user_id, "m.match": true}).first("m.id")
+    return db("user_matches as m").join("users as u", "u.id", "m.user_id").join("jobs as j", "j.id", "m.job_id").where({"u.id":user_id, "m.match": true}).select("m.id as id", "j.name as title", "j.id as job_id", "j.description", "j.type");
 }
 
 const findById = (id) => {
